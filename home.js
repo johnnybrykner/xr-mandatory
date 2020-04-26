@@ -6,17 +6,17 @@ export default class home extends React.Component {
     return (
       <View style={styles.container}>
         <VrButton
-          onClick={() => this.props.history.push("./second")}
+          onClick={() => this.props.history.push("./scene/Desert")}
           style={styles.button}
         >
-          <Text style={styles.greeting}>To second</Text>
+          <Text style={styles.greeting}>To first scene</Text>
         </VrButton>
 
         <VrButton
-          onClick={() => this.props.history.push("./first")}
+          onClick={() => this.props.history.push("./scene/Venice")}
           style={styles.button}
         >
-          <Text style={styles.greeting}>To first</Text>
+          <Text style={styles.greeting}>To second scene</Text>
         </VrButton>
       </View>
     );
@@ -25,12 +25,17 @@ export default class home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
     flexDirection: "row",
+    width: "max-content",
+    height: "max-content",
+    justifyContent: "center",
   },
   button: {
-    width: 200,
-    height: 100,
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    backgroundColor: "red",
+    width: 250,
+    padding: 50,
+    margin: 50,
     justifyContent: "center",
     alignItems: "center",
   },
