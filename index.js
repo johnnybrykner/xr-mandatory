@@ -8,12 +8,12 @@ export default class xr_mandatory extends React.Component {
   state = {
     scenes: [
       {
-        name: "Venice",
-        image: "venice.jpg",
+        name: "City",
+        image: "city.jpg",
       },
       {
-        name: "Desert",
-        image: "something.jpg",
+        name: "Sky",
+        image: "sky.jpg",
       },
     ],
   };

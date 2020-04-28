@@ -1,19 +1,21 @@
 import React from "react";
 import { StyleSheet, VrButton, Text, View } from "react-360";
+import Model from "./model";
 
 export default class home extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Model />
         <VrButton
-          onClick={() => this.props.history.push("./scene/Desert")}
+          onClick={() => this.props.history.push("./scene/Sky")}
           style={styles.button}
         >
           <Text style={styles.greeting}>To first scene</Text>
         </VrButton>
 
         <VrButton
-          onClick={() => this.props.history.push("./scene/Venice")}
+          onClick={() => this.props.history.push("./scene/City")}
           style={styles.button}
         >
           <Text style={styles.greeting}>To second scene</Text>

@@ -50,12 +50,12 @@ export default class scenario extends React.Component {
 
 const styles = StyleSheet.create({
   panel: {
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    padding: 100,
     width: "max-content",
     height: "max-content",
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
     justifyContent: "center",
     alignItems: "flex-start",
-    padding: 100,
   },
   button: {
     backgroundColor: "rgb(0, 0, 255)",
