@@ -1,8 +1,10 @@
 import React from "react";
-import { asset, Animated, VrButton, AppRegistry } from "react-360";
+import { asset, Animated, VrButton, NativeModules } from "react-360";
 import Entity from "Entity";
 import AmbientLight from "AmbientLight";
 import PointLight from "PointLight";
+
+// const {repositioningModule} = NativeModules;
 
 const AnimatedEntity = Animated.createAnimatedComponent(Entity);
 
@@ -14,20 +16,22 @@ export default class model extends React.Component {
   }
 
   render() {
+    // repositioningModule.something();
     return (
       <VrButton onClick={(event) => console.log(event.nativeEvent)}>
         <AmbientLight intensity={1.0} color={"#ffffff"} />
         <PointLight
           intensity={1.0}
-          style={{ transform: [{ translate: [-3, -3, -5] }] }}
+          // style={{ transform: [{ translate: this.props.position }] }}
         />
         <AnimatedEntity
-          style={{ transform: [{ rotateY: this.rotation }, { scale: 0.5 }] }}
-          source={{ obj: asset("Astronaut.obj"), mtl: asset("Astronaut.mtl") }}
+          style={{ transform: [{ rotateY: this.rotation }, { scale: 10 }] }}
+          source={{
+            obj: asset(`${this.props.name}.obj`),
+            mtl: asset(`${this.props.name}.mtl`),
+          }}
         />
       </VrButton>
     );
   }
 }
-
-AppRegistry.registerComponent("model", () => model);

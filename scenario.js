@@ -23,13 +23,15 @@ export default class scenario extends React.Component {
 
   _whatToRender() {
     return this.state ? (
-      <VrButton onClick={() => this._setBackground()} style={styles.button}>
-        <Text style={styles.greeting}>
-          {"Click here to see the " + this.state.scene.name + " scene"}
-        </Text>
-      </VrButton>
+      <View>
+        <VrButton onClick={() => this._setBackground()} style={styles.button}>
+          <Text style={styles.greeting}>
+            {"Click here to see the " + this.state.scene.name + " scene"}
+          </Text>
+        </VrButton>
+      </View>
     ) : (
-      <Text style={styles.greeting}>Loading...</Text>
+      <Text>Loading...</Text>
     );
   }
 
