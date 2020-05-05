@@ -1,9 +1,9 @@
 import React from "react";
 import { View, AppRegistry } from "react-360";
 import { MemoryRouter as Router, Route } from "react-router";
-import Scenario from "./scenario";
-import ModelContainer from "./modelContainer";
-import Home from "./home";
+import Scenario from "./views/scenario";
+import ModelContainer from "./components/modelContainer";
+import Home from "./views/home";
 
 export default class xr_mandatory extends React.Component {
   state = {

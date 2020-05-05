@@ -9,16 +9,17 @@
     "devtools": "react-devtools"
   },
   "dependencies": {
+    "base-64": "0.1.0",
     "react": "16.3.2",
-    "react-360": "~1.1.0",
-    "react-360-web": "~1.1.0",
-    "react-native": "~0.55.4",
-    "react-router": "^5.1.2",
-    "three": "^0.87.0"
+    "react-360": "1.1.0",
+    "react-360-web": "1.1.0",
+    "react-native": "0.55.4",
+    "react-router": "5.1.2",
+    "three": "0.87.0"
   },
   "devDependencies": {
-    "babel-preset-react-native": "^1.9.1",
-    "react-devtools": "^2.5.2",
+    "babel-preset-react-native": "1.9.1",
+    "react-devtools": "2.5.2",
     "react-test-renderer": "16.0.0",
     "xopen": "1.0.0",
     "husky": "4.2.3",
