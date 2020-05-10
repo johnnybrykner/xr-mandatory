@@ -6,7 +6,6 @@ import {
   NativeModules,
   StyleSheet,
   Text,
-  Image,
 } from "react-360";
 const { AudioModule } = NativeModules;
 
@@ -67,8 +66,6 @@ const styles = StyleSheet.create({
   audio: {
     backgroundColor: "#CFF09E",
     position: "absolute",
-    top: "70%",
-    right: "10%",
     height: 150,
     width: 300,
   },

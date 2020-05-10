@@ -15,7 +15,7 @@ export default class model extends React.Component {
 
   render() {
     return (
-      <VrButton onClick={(event) => console.log(event.nativeEvent)}>
+      <VrButton>
         <AmbientLight intensity={1.0} color={"#ffffff"} />
         <PointLight
           intensity={1.0}

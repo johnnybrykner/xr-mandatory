@@ -1,7 +1,7 @@
 import React from "react";
-import { asset, StyleSheet, VrButton, Text, View, Image } from "react-360";
+import { StyleSheet, VrButton, Text, View } from "react-360";
 import Album from "../components/album";
-import Track from "../components/track";
+import Player from "../components/player";
 import Artist from "../components/artist";
 import List from "../components/list";
 import Spotify from "../spotify";
@@ -19,16 +19,20 @@ export default class home extends React.Component {
     const filteredArtist = this.state.availableArtists.find(
       (artist) => artist.name === artistName
     );
-    this.setState(
-      {
-        activeArtistId: filteredArtist.spotifyId,
-      },
-      (_) => console.log(this.state.activeArtistId)
-    );
+    this.setState({
+      activeArtistId: filteredArtist.spotifyId,
+      activeArtistName: filteredArtist.name,
+    });
+  }
+
+  _setActiveAlbum(albumId, albumName) {
+    this.setState({
+      activeAlbumId: albumId,
+      activeAlbumName: albumName,
+    });
   }
 
   render() {
-    console.log("rerendered!");
     return this.state && this.state.token ? (
       <View style={styles.container}>
         <View style={styles.routerButtons}>
@@ -53,11 +57,19 @@ export default class home extends React.Component {
             artists={this.state.availableArtists}
           />
           <Artist
+            setActiveAlbum={(albumId, albumName) =>
+              this._setActiveAlbum(albumId, albumName)
+            }
             activeArtistId={this.state.activeArtistId}
             token={this.state.token}
+            activeArtistName={this.state.activeArtistName}
           />
-          <Album />
-          <Track />
+          <Album
+            activeAlbumId={this.state.activeAlbumId}
+            activeAlbumName={this.state.activeAlbumName}
+            token={this.state.token}
+          />
+          <Player />
         </View>
       </View>
     ) : (
@@ -96,6 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    height: "max-content",
   },
   loading: {
     width: 200,

@@ -1,5 +1,5 @@
 import React from "react";
-import { asset, View, StyleSheet, Text, Image, VrButton } from "react-360";
+import { View, StyleSheet, Text, VrButton } from "react-360";
 
 export default class list extends React.Component {
   componentDidMount() {
@@ -22,10 +22,6 @@ export default class list extends React.Component {
             key={artist.name}
             style={styles.artist}
           >
-            <Image
-              style={styles.artist__img}
-              source={asset("PUT SOURCE HERE")}
-            ></Image>
             <Text style={styles.artist__text}>{artist.name}</Text>
           </VrButton>
         );
@@ -40,8 +36,6 @@ export default class list extends React.Component {
       <View style={styles.container}>
         <Text style={styles.header}>PICK YOUR FAVORITE ARTIST</Text>
         {/* put line here, or just an underline one the heading */}
-
-        {/* Foreach this should be: */}
         {this._renderAvailableArtists()}
       </View>
     );
@@ -68,8 +62,6 @@ const styles = StyleSheet.create({
     height: "max-content",
     width: "max-content",
   },
-  /* Foreach this should be */
-  artist__img: {},
   artist__text: {
     fontSize: 16,
     color: "red",

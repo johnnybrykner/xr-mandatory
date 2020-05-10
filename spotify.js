@@ -14,9 +14,9 @@ const generateToken = async () => {
   }
 };
 
-const getArtistData = async (artistId, spotifyToken) => {
+const getArtistAlbums = async (artistId, spotifyToken) => {
   const rawData = await fetch(
-    "https://api.spotify.com/v1/artists/" + artistId,
+    "https://api.spotify.com/v1/artists/" + artistId + "/albums",
     {
       headers: {
         Authorization: `Bearer ${spotifyToken}`,
@@ -27,7 +27,21 @@ const getArtistData = async (artistId, spotifyToken) => {
   return artistJson;
 };
 
+const getAlbumData = async (albumId, spotifyToken) => {
+  const rawData = await fetch(
+    "https://api.spotify.com/v1/albums/" + albumId + "/tracks",
+    {
+      headers: {
+        Authorization: `Bearer ${spotifyToken}`,
+      },
+    }
+  );
+  const albumJson = await rawData.json();
+  return albumJson;
+};
+
 module.exports = {
   generateToken,
-  getArtistData,
+  getArtistAlbums,
+  getAlbumData,
 };
