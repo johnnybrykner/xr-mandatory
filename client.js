@@ -34,8 +34,11 @@ function init(bundle, parent, options = {}) {
   //   new Location([0, 0, 3])
   // );
 
-  // Load the initial environment
   r360.compositor.setBackground(r360.getAssetURL("360_world.jpg"));
+
+  const video = r360.compositor.createVideoPlayer("backgroundVideo");
+  video.setSource("./static_assets/smth.mp4", "3DBT", "mp4");
+  video.setLoop(true);
 }
 
 window.React360 = { init };

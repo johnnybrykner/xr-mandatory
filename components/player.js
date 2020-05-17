@@ -6,35 +6,73 @@ import {
   NativeModules,
   StyleSheet,
   Text,
+  Environment,
 } from "react-360";
-const { AudioModule } = NativeModules;
+const { AudioModule, VideoModule } = NativeModules;
 
 AudioModule.createAudio("song", {
-  source: asset("song.mp3"),
-  volume: 0.2,
+  source: asset("No One Cares.opus"),
+  volume: 0.5,
   is3d: true,
 });
 
 export default class track extends React.Component {
+  componentWillReceiveProps(newProps) {
+    if (newProps && newProps.activeTrackName && newProps.activeArtistName) {
+      this.setState({
+        activeTrackName: newProps.activeTrackName,
+        activeArtistName: newProps.activeArtistName,
+      });
+    }
+  }
+
+  state = {
+    volume: 0.5,
+    activeTrackName: "No track selected",
+  };
+
   _playAudio() {
     AudioModule.play("song", {
       position: [6, 2, 3],
     });
+    Environment.setBackgroundVideo("backgroundVideo");
+    VideoModule.resume("backgroundVideo");
   }
-
   _stopAudio() {
     AudioModule.stop("song");
+    VideoModule.stop("backgroundVideo");
+    Environment.setBackgroundImage(asset("360_world.jpg"));
   }
-
   _turnUpVol() {
-    AudioModule.setParams("song", {
-      volume: 0.8,
-    });
+    if (this.state.volume >= 1) return;
+    this.setState(
+      {
+        volume: this.state.volume + 0.25,
+      },
+      (_) => {
+        AudioModule.setParams("song", {
+          volume: this.state.volume,
+        });
+      }
+    );
+  }
+  _turnDownVol() {
+    if (this.state.volume <= 0.25) return;
+    this.setState(
+      {
+        volume: this.state.volume - 0.25,
+      },
+      (_) => {
+        AudioModule.setParams("song", {
+          volume: this.state.volume,
+        });
+      }
+    );
   }
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <View style={styles.audio}>
           {/* Playbutton */}
           <VrButton style={styles.playButton} onClick={() => this._playAudio()}>
@@ -51,11 +89,34 @@ export default class track extends React.Component {
 
           {/* Turn it up */}
           <VrButton
-            style={styles.pauseButton}
+            style={styles.volumeButton}
             onClick={() => this._turnUpVol()}
           >
             <Text>Turn it up</Text>
           </VrButton>
+
+          {/* Turn it down */}
+          <VrButton
+            style={styles.volumeButton}
+            onClick={() => this._turnDownVol()}
+          >
+            <Text>Turn it down</Text>
+          </VrButton>
+        </View>
+        <View style={styles.trackInfoContainer}>
+          {this.state.activeTrackName && this.state.activeArtistName ? (
+            <View>
+              <Text style={styles.trackTitle}>
+                {this.state.activeTrackName}
+              </Text>
+              <Text style={styles.trackTitle}>by</Text>
+              <Text style={styles.trackTitle}>
+                {this.state.activeArtistName}
+              </Text>
+            </View>
+          ) : (
+            <Text style={styles.trackTitle}>{this.state.activeTrackName}</Text>
+          )}
         </View>
       </View>
     );
@@ -63,20 +124,38 @@ export default class track extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "black",
+    width: "max-content",
+    height: "max-content",
+    padding: 100,
+  },
   audio: {
     backgroundColor: "#CFF09E",
-    position: "absolute",
-    height: 150,
-    width: 300,
+    height: "max-content",
+    width: "max-content",
   },
   playButton: {
-    height: 50,
-    width: 100,
+    height: 100,
+    width: 200,
     backgroundColor: "orange",
   },
   pauseButton: {
-    height: 50,
-    width: 100,
+    height: 100,
+    width: 200,
     backgroundColor: "red",
+  },
+  volumeButton: {
+    height: 100,
+    width: 200,
+    backgroundColor: "green",
+  },
+  trackTitle: {
+    fontSize: 30,
+  },
+  trackInfoContainer: {
+    margin: 50,
   },
 });

@@ -49,7 +49,7 @@ export default class album extends React.Component {
               <VrButton
                 key={track.id}
                 style={styles.song__item}
-                // onClick={() => this.props.setActiveTrack(track.name)}
+                onClick={() => this.props.setActiveTrack(track.name)}
               >
                 <Text style={styles.song__title}>{track.name}</Text>
               </VrButton>

@@ -4,7 +4,7 @@ const generateToken = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${base64.encode("")}`,
+      Authorization: `Basic ${base64.encode(process.env.SPOTIFY_USER)}`,
     },
     body: "grant_type=client_credentials",
   });

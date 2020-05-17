@@ -32,6 +32,12 @@ export default class home extends React.Component {
     });
   }
 
+  _setActiveTrack(trackName) {
+    this.setState({
+      activeTrackName: trackName,
+    });
+  }
+
   render() {
     return this.state && this.state.token ? (
       <View style={styles.container}>
@@ -68,8 +74,12 @@ export default class home extends React.Component {
             activeAlbumId={this.state.activeAlbumId}
             activeAlbumName={this.state.activeAlbumName}
             token={this.state.token}
+            setActiveTrack={(trackName) => this._setActiveTrack(trackName)}
           />
-          <Player />
+          <Player
+            activeTrackName={this.state.activeTrackName}
+            activeArtistName={this.state.activeArtistName}
+          />
         </View>
       </View>
     ) : (
