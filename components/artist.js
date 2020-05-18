@@ -77,7 +77,7 @@ export default class artist extends React.Component {
 const styles = StyleSheet.create({
   album__container: {
     width: 600,
-    height: "100%",
+    height: "max-content",
     overflow: "visible",
     paddingTop: 15,
     paddingBottom: 15,

@@ -37,7 +37,7 @@ function init(bundle, parent, options = {}) {
   r360.compositor.setBackground(r360.getAssetURL("360_world.jpg"));
 
   const video = r360.compositor.createVideoPlayer("backgroundVideo");
-  video.setSource("./static_assets/smth-short.mp4", "2D", "mp4");
+  video.setSource("./static_assets/test4.mp4", "2D", "mp4");
   video.setLoop(true);
 }
 

@@ -94,7 +94,7 @@ export default class home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
+    backgroundColor: "rgba(255, 255, 255, 0.0)",
     flexDirection: "row",
     width: "max-content",
     height: "max-content",

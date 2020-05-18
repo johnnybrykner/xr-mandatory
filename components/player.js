@@ -38,19 +38,74 @@ export default class track extends React.Component {
   state = {
     volume: 0.75,
     activeTrackName: "No track selected",
+    positionX: 0,
+    positionZ: 0,
+    isPlaying: false,
+    isSpatial: false,
   };
 
+  positioningTimeout = null;
+
+  positioningTimeoutForwards() {
+    this.state.positionX < 2
+      ? (this.positioningTimeout = setTimeout(() => {
+          let newPostionX = this.state.positionX;
+          newPostionX += 0.25;
+          this.setState(
+            {
+              isSpatial: true,
+              positionX: newPostionX,
+            },
+            (_) => {
+              AudioModule.setParams("song", {
+                position: [this.state.positionX, 0, 0],
+              });
+              this.positioningTimeoutForwards();
+            }
+          );
+        }, 250))
+      : this.positioningTimeoutBackwards();
+  }
+
+  positioningTimeoutBackwards() {
+    this.state.positionX > -2
+      ? (this.positioningTimeout = setTimeout(() => {
+          let newPostionX = this.state.positionX;
+          newPostionX -= 0.25;
+          this.setState(
+            {
+              isSpatial: true,
+              positionX: newPostionX,
+            },
+            (_) => {
+              AudioModule.setParams("song", {
+                position: [this.state.positionX, 0, 0],
+              });
+              this.positioningTimeoutBackwards();
+            }
+          );
+        }, 250))
+      : this.positioningTimeoutForwards();
+  }
+
   _playAudio() {
+    if (this.state.isPlaying) {
+      this._stopAudio();
+      return;
+    }
     AudioModule.play("song", {
-      position: [6, 2, 3],
+      position: [0, 0, 0],
+    });
+    this.setState({
+      isPlaying: true,
     });
     Environment.setBackgroundVideo("backgroundVideo");
     VideoModule.resume("backgroundVideo");
-    setInterval(() => {
-      console.log("change positioning");
-    }, 1000);
   }
   _stopAudio() {
+    this.setState({
+      isPlaying: false,
+    });
     AudioModule.stop("song");
     VideoModule.stop("backgroundVideo");
     Environment.setBackgroundImage(asset("360_world.jpg"));
@@ -80,6 +135,23 @@ export default class track extends React.Component {
         });
       }
     );
+  }
+  _spatialAudio() {
+    if (this.state.isSpatial) {
+      clearTimeout(this.positioningTimeout);
+      this.setState(
+        {
+          isSpatial: false,
+        },
+        (_) => {
+          AudioModule.setParams("song", {
+            position: [0, 0, 0],
+          });
+        }
+      );
+      return;
+    }
+    this.positioningTimeoutForwards();
   }
 
   render() {
@@ -113,6 +185,14 @@ export default class track extends React.Component {
             onClick={() => this._turnDownVol()}
           >
             <Text>Turn it down</Text>
+          </VrButton>
+
+          {/* Toggle spatial audio */}
+          <VrButton
+            style={styles.spatialButton}
+            onClick={() => this._spatialAudio()}
+          >
+            <Text>Toggle spatial audio</Text>
           </VrButton>
         </View>
         <View style={styles.trackInfoContainer}>
@@ -169,5 +249,10 @@ const styles = StyleSheet.create({
   },
   trackInfoContainer: {
     margin: 50,
+  },
+  spatialButton: {
+    height: 100,
+    width: 200,
+    backgroundColor: "blue",
   },
 });

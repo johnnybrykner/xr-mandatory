@@ -45,7 +45,7 @@ export default class list extends React.Component {
 const styles = StyleSheet.create({
   container: {
     width: 500,
-    height: 500,
+    height: "max-content",
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
