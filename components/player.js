@@ -10,24 +10,33 @@ import {
 } from "react-360";
 const { AudioModule, VideoModule } = NativeModules;
 
-AudioModule.createAudio("song", {
-  source: asset("No One Cares.opus"),
-  volume: 0.5,
-  is3d: true,
-});
-
 export default class track extends React.Component {
   componentWillReceiveProps(newProps) {
-    if (newProps && newProps.activeTrackName && newProps.activeArtistName) {
-      this.setState({
-        activeTrackName: newProps.activeTrackName,
-        activeArtistName: newProps.activeArtistName,
-      });
+    if (
+      newProps &&
+      newProps.activeTrackName &&
+      newProps.activeArtistName &&
+      newProps.activeTrackName !== this.state.activeTrackName
+    ) {
+      AudioModule.destroy("song");
+      this.setState(
+        {
+          activeTrackName: newProps.activeTrackName,
+          activeArtistName: newProps.activeArtistName,
+        },
+        (_) => {
+          AudioModule.createAudio("song", {
+            source: asset(`${this.state.activeTrackName}.opus`),
+            volume: 0.75,
+            is3d: true,
+          });
+        }
+      );
     }
   }
 
   state = {
-    volume: 0.5,
+    volume: 0.75,
     activeTrackName: "No track selected",
   };
 
@@ -37,6 +46,9 @@ export default class track extends React.Component {
     });
     Environment.setBackgroundVideo("backgroundVideo");
     VideoModule.resume("backgroundVideo");
+    setInterval(() => {
+      console.log("change positioning");
+    }, 1000);
   }
   _stopAudio() {
     AudioModule.stop("song");

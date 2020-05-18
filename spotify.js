@@ -4,7 +4,7 @@ const generateToken = async () => {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${base64.encode(process.env.SPOTIFY_USER)}`,
+      Authorization: `Basic ${base64.encode("")}`,
     },
     body: "grant_type=client_credentials",
   });
@@ -16,7 +16,9 @@ const generateToken = async () => {
 
 const getArtistAlbums = async (artistId, spotifyToken) => {
   const rawData = await fetch(
-    "https://api.spotify.com/v1/artists/" + artistId + "/albums",
+    "https://api.spotify.com/v1/artists/" +
+      artistId +
+      "/albums?include_groups=album&limit=42",
     {
       headers: {
         Authorization: `Bearer ${spotifyToken}`,

@@ -16,8 +16,8 @@ function init(bundle, parent, options = {}) {
   r360.renderToSurface(r360.createRoot("model_container", {}), plane);
 
   const cylinder = new Surface(
-    2500 /* width */,
-    1500 /* height */,
+    4096 /* width */,
+    1250 /* height */,
     Surface.SurfaceShape.Cylinder /* shape */
   );
 
@@ -37,7 +37,7 @@ function init(bundle, parent, options = {}) {
   r360.compositor.setBackground(r360.getAssetURL("360_world.jpg"));
 
   const video = r360.compositor.createVideoPlayer("backgroundVideo");
-  video.setSource("./static_assets/smth.mp4", "3DBT", "mp4");
+  video.setSource("./static_assets/smth-short.mp4", "2D", "mp4");
   video.setLoop(true);
 }
 

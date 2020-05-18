@@ -20,9 +20,15 @@ export default class artist extends React.Component {
       this.props.activeArtistName &&
       callingForTheFirstTime
     ) {
-      artistAlbums = await Spotify.getArtistAlbums(
+      let artistAlbums = await Spotify.getArtistAlbums(
         this.props.activeArtistId,
         this.props.token
+      );
+      artistAlbums = Object.values(
+        artistAlbums.items.reduce(
+          (acc, cur) => Object.assign(acc, { [cur.name.toLowerCase()]: cur }),
+          {}
+        )
       );
       this.setState({
         artistAlbums,
@@ -37,7 +43,7 @@ export default class artist extends React.Component {
         <Text style={styles.album__heading}>
           Albums from {this.props.activeArtistName}
         </Text>
-        {artistAlbums.items.map((album) => {
+        {this.state.artistAlbums.map((album) => {
           return (
             <VrButton
               key={album.id}
@@ -71,14 +77,15 @@ export default class artist extends React.Component {
 const styles = StyleSheet.create({
   album__container: {
     width: 600,
-    height: "max-content",
-    overflow: "scroll",
+    height: "100%",
+    overflow: "visible",
     paddingTop: 15,
     paddingBottom: 15,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: "#2f2f2f",
-    margin: 30,
+    marginLeft: 30,
+    marginRight: 30,
   },
   album__heading: {
     color: "#FFFFFF",

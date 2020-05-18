@@ -54,16 +54,16 @@ const styles = StyleSheet.create({
     margin: 30,
   },
   header: {
-    fontSize: 26,
+    fontSize: 30,
     fontFamily: "Raleway-Heavy",
     color: "white",
   },
   artist: {
-    height: "max-content",
-    width: "max-content",
+    paddingBottom: 25,
+    paddingTop: 25,
   },
   artist__text: {
-    fontSize: 16,
+    fontSize: 24,
     color: "red",
   },
 });

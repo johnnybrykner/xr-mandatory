@@ -12,6 +12,7 @@ export default class home extends React.Component {
     this.setState({
       token,
       availableArtists: require("../artists.json"),
+      availableTracks: require("../tracks.json"),
     });
   }
 
@@ -71,6 +72,7 @@ export default class home extends React.Component {
             activeArtistName={this.state.activeArtistName}
           />
           <Album
+            tracks={this.state.availableTracks}
             activeAlbumId={this.state.activeAlbumId}
             activeAlbumName={this.state.activeAlbumName}
             token={this.state.token}
@@ -93,7 +95,7 @@ export default class home extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "rgba(255, 255, 255, 0.4)",
-    flexDirection: "column",
+    flexDirection: "row",
     width: "max-content",
     height: "max-content",
     justifyContent: "center",

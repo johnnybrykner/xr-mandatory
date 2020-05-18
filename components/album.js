@@ -3,6 +3,12 @@ import { View, StyleSheet, Text, VrButton } from "react-360";
 import Spotify from "../spotify";
 
 export default class album extends React.Component {
+  componentDidMount() {
+    this.setState({
+      tracks: this.props.tracks,
+    });
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeAlbumId !== this.props.activeAlbumId) {
       this.setState({
@@ -51,7 +57,15 @@ export default class album extends React.Component {
                 style={styles.song__item}
                 onClick={() => this.props.setActiveTrack(track.name)}
               >
-                <Text style={styles.song__title}>{track.name}</Text>
+                <Text
+                  style={
+                    this.state.tracks.includes(track.name.toLowerCase())
+                      ? styles.song__title__highlighted
+                      : styles.song__title
+                  }
+                >
+                  {track.name}
+                </Text>
               </VrButton>
             );
           })}
@@ -92,12 +106,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "max-content",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   song__item: {
-    margin: 16,
+    marginTop: 10,
+    marginBottom: 10,
   },
-  song__title: {},
+  song__title: {
+    color: "red",
+  },
+  song__title__highlighted: {
+    color: "green",
+  },
   song__length: {},
 });
