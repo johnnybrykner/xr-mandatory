@@ -1,5 +1,5 @@
 import React from "react";
-import { View, AppRegistry, Text, StyleSheet } from "react-360";
+import { View, Text, StyleSheet } from "react-360";
 import Model from "./model";
 
 export default class model_container extends React.Component {
@@ -35,5 +35,3 @@ const styles = StyleSheet.create({
     padding: 100,
   },
 });
-
-AppRegistry.registerComponent("model_container", () => model_container);

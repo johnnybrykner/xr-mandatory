@@ -1,5 +1,9 @@
 [
   {
+    "name": "Lil Dicky",
+    "spotifyId": "1tqhsYv8yBBdwANFNzHtcr"
+  },
+  {
     "name": "Tyler, The Creator",
     "spotifyId": "4V8LLVI7PbaPR0K2TGSxFF"
   },
@@ -12,24 +16,12 @@
     "spotifyId": "27T030eWyCQRmDyuvr1kxY"
   },
   {
-  "name": "Green Day",
-  "spotifyId": "7oPftvlwr6VrsViSDV7fJY"
+    "name": "Green Day",
+    "spotifyId": "7oPftvlwr6VrsViSDV7fJY"
   },
   {
     "name" : "Goodbye June",
     "spotifyId": "1l9I7G8J8AnMScWQwlNJ4M"
-  },
-  {
-    "name": "Kanye West",
-    "spotifyId": "K4W6rqBFWDnAN6FQUkS6x"
-  },
-  {
-    "name": "Kendrick Lamar",
-    "spotifyId": "2YZyLoL8N0Wb9xBt1NhZWg"
-  },
-  {
-    "name": "Drip Report",
-    "spotifyId": "3O5HD95HTEPgoPFOjAb7yV"
   },
   {
     "name": "Calvin Harris",

@@ -6,15 +6,6 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
-  const plane = new Surface(
-    1000 /* width */,
-    1000 /* height */,
-    Surface.SurfaceShape.Flat /* shape */
-  );
-  plane.setAngle(0, Math.PI / 4);
-
-  r360.renderToSurface(r360.createRoot("model_container", {}), plane);
-
   const cylinder = new Surface(
     4096 /* width */,
     1250 /* height */,
@@ -28,11 +19,12 @@ function init(bundle, parent, options = {}) {
     cylinder
   );
 
-  // r360.renderToLocation(
-  //   r360.createRoot('model', {
-  //   }),
-  //   new Location([0, 0, 3])
-  // );
+  r360.renderToLocation(
+    r360.createRoot("model", {
+      name: "astronaut",
+    }),
+    new Location([50, -25, -25])
+  );
 
   r360.compositor.setBackground(r360.getAssetURL("360_world.jpg"));
 

@@ -19,17 +19,19 @@ export default class track extends React.Component {
       newProps.activeTrackName !== this.state.activeTrackName
     ) {
       AudioModule.destroy("song");
+      AudioModule.createAudio("song", {
+        source: asset(`${newProps.activeTrackName}.opus`),
+        volume: 0.75,
+        is3d: true,
+      });
       this.setState(
         {
-          activeTrackName: newProps.activeTrackName,
+          activeTrackName: newProps.activeTrackName.split(/\(/)[0],
           activeArtistName: newProps.activeArtistName,
+          isPlaying: false,
         },
-        (_) => {
-          AudioModule.createAudio("song", {
-            source: asset(`${this.state.activeTrackName}.opus`),
-            volume: 0.75,
-            is3d: true,
-          });
+        () => {
+          this._playAudio();
         }
       );
     }
@@ -220,6 +222,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "black",
+    justifyContent: "space-between",
     width: "max-content",
     height: "max-content",
     padding: 100,

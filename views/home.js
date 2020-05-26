@@ -42,7 +42,7 @@ export default class home extends React.Component {
   render() {
     return this.state && this.state.token ? (
       <View style={styles.container}>
-        <View style={styles.routerButtons}>
+        {/* <View style={styles.routerButtons}>
           <VrButton
             onClick={() => this.props.history.push("./scene/Sky")}
             style={styles.button}
@@ -56,7 +56,7 @@ export default class home extends React.Component {
           >
             <Text style={styles.greeting}>To second scene</Text>
           </VrButton>
-        </View>
+        </View> */}
 
         <View style={styles.contentSections}>
           <List
