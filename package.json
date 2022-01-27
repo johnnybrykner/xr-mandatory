@@ -15,7 +15,7 @@
     "react-360-web": "1.1.0",
     "react-native": "0.55.4",
     "react-router": "5.1.2",
-    "three": "0.87.0"
+    "three": "0.137.0"
   },
   "devDependencies": {
     "babel-preset-react-native": "1.9.1",
